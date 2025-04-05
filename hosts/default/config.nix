@@ -1,17 +1,19 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, inputs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
-      ./../../modules/nixos/stylix.nix
-      ./../../modules/nixos/nvf.nix
-    ];
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.default
+    ./../../modules/nixos/stylix.nix
+    ./../../modules/nixos/nvf.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -45,13 +47,12 @@
     LC_TIME = "en_CA.UTF-8";
   };
 
-
-  # User 
+  # User
   users.users.narayan = {
     isNormalUser = true;
     shell = pkgs.fish;
     description = "Narayan";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKyl/I9MXx08Djz75tGfTf+Jo7RxxfQzmMtUBgfzxFXf narayan@nixos"
     ];
@@ -67,9 +68,9 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  
+
   # Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Fish
   programs.fish.enable = true;
@@ -77,13 +78,19 @@
   # NTFS
   boot.supportedFilesystems = ["ntfs"];
 
+  # Hyprland
+  programs.hyprland.enable = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-     neovim
-     yazi
+    librewolf
+    typst
+    zathura
+    fastfetch
+    nitch
+    yazi
+    inputs.zen-browser.packages.${pkgs.system}.default
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -112,5 +119,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }

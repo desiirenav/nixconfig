@@ -11,11 +11,22 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "github:hyprwm/Hyprland";
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     nvf.url = "github:notashelf/nvf";
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, stylix, nvf, ... }@inputs: { 
+  outputs = {
+    self,
+    nixpkgs,
+    stylix,
+    nvf,
+    ...
+  } @ inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
