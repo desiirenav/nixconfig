@@ -11,6 +11,7 @@
     enable = true;
     settings = {
       vim = {
+        statusline.lualine.theme = lib.mkForce "auto";
         theme = lib.mkForce {
           enable = true;
           name = "rose-pine";
