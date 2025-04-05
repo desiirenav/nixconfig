@@ -102,6 +102,9 @@
     yazi
     brightnessctl
     inputs.zen-browser.packages."${system}".default
+    grim
+    slurp
+    wl-clipboard
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
