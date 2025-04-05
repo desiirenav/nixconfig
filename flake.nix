@@ -7,10 +7,15 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
+    nvf.url = "github:notashelf/nvf";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: { 
+  outputs = { self, nixpkgs, stylix, nvf, ... }@inputs: { 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
