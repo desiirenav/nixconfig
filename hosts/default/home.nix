@@ -7,7 +7,6 @@
     ./../../modules/home-manager/starship/starship.nix
     ./../../modules/home-manager/stylix.nix
     ./../../modules/home-manager/hyprland.nix
-    ./../../modules/home-manager/waybar.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

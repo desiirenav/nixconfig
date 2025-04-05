@@ -60,7 +60,7 @@ in {
         resize_on_border = "no";
         allow_tearing = "no";
         layout = "dwindle";
-        "col.active_border" = "rgb(${config.stylix.base16Scheme.base0E})";
+        "col.active_border" = "rgb(${config.stylix.base16Scheme.base0A})";
       };
 
       decoration = {
