@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./../../modules/home-manager/starship/starship.nix
     ./../../modules/home-manager/stylix.nix
@@ -19,7 +21,7 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
-  
+
   programs.git = {
     enable = true;
     userName = "desiirenav";
@@ -30,6 +32,11 @@
     enable = true;
     interactiveShellInit = ''
       set -g fish_greeting ""
+
+      if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+          exec Hyprland
+      end
+
       starship init fish | source
     '';
   };
