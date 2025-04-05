@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./../../modules/home-manager/starship/starship.nix
+  ];
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "narayan";
@@ -19,6 +23,14 @@
     enable = true;
     userName = "desiirenav";
     userEmail = "desiirenav@hotmail.com";
+  };
+
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      set -g fish_greeting ""
+      starship init fish | source
+    '';
   };
 
   # The home.packages option allows you to install Nix packages into your

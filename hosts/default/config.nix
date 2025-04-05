@@ -47,6 +47,7 @@
   # User 
   users.users.narayan = {
     isNormalUser = true;
+    shell = pkgs.fish;
     description = "Narayan";
     extraGroups = [ "networkmanager" "wheel" ];
     openssh.authorizedKeys.keys = [
@@ -67,6 +68,9 @@
   
   # Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # Fish
+  programs.fish.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
