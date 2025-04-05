@@ -90,7 +90,6 @@
     fastfetch
     nitch
     yazi
-    inputs.zen-browser.packages.${pkgs.system}.default
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -105,7 +104,15 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-
+  # Autoclean
+  nix = {
+    settings.auto-optimise-store = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+  };
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

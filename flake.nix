@@ -14,10 +14,6 @@
     hyprland.url = "github:hyprwm/Hyprland";
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     nvf.url = "github:notashelf/nvf";
-    zen-browser = {
-      url = "github:youwen5/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
