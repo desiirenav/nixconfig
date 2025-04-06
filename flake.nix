@@ -15,46 +15,24 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprpanel.url = "github:jas-singhfsu/hyprpanel";
-    hyprpanel.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "github:hyprwm/Hyprland";
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     nvf.url = "github:notashelf/nvf";
   };
 
-  outputs = inputs @ {
+  outputs = {
     self,
     nixpkgs,
-    home-manager,
     stylix,
-    hyprpanel,
+    nvf,
     ...
-  }: let
-    system = "x86_64-linux";
-    lib = nixpkgs.lib;
-    pkgs = nixpkgs.legacyPackages.${system};
-  in {
-    nixosConfigurations = {
-      nixos = lib.nixosSystem {
-        inherit system;
-        specialArgs = {inherit inputs system;};
-        modules = [./hosts/default/config.nix];
-      };
-    };
-
-    homeConfigurations = {
-      narayan = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [
-            inputs.hyprpanel.overlay
-          ];
-        };
-        extraSpecialArgs = {inherit system inputs;};
-        modules = [
-          ./hosts/default/home.nix
-        ];
-      };
+  } @ inputs: {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./hosts/default/config.nix
+        inputs.home-manager.nixosModules.default
+      ];
     };
   };
 }
