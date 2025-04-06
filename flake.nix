@@ -15,11 +15,6 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprpanel.url = "github:jas-singhfsu/hyprpanel";
-    # If you're worried about mismatched versions
-    # when using, e.g., `swww` from your own script,
-    # you can also do the following.
-    hyprpanel.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "github:hyprwm/Hyprland";
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     nvf.url = "github:notashelf/nvf";
@@ -30,7 +25,6 @@
     nixpkgs,
     stylix,
     nvf,
-    hyprpanel,
     ...
   } @ inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
@@ -38,7 +32,6 @@
       modules = [
         ./hosts/default/config.nix
         inputs.home-manager.nixosModules.default
-        {nixpkgs.overlays = [inputs.hyprpanel.overlay];}
       ];
     };
   };
