@@ -95,6 +95,9 @@
     grim
     slurp
     wl-clipboard
+    (discord.override {
+      withVencord = true;
+    })
   ];
 
   # OpenSSH daemon.
